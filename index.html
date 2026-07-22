@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js 本地引入</title>
+    <title>Three.js 房屋Demo</title>
     <style>
         body { margin: 0; overflow: hidden; }
     </style>
@@ -13,15 +13,14 @@
 <script type="importmap">
 {
     "imports": {
-        "three": "./node_modules/three/build/three.module.js",
-        "three/addons/": "./node_modules/three/examples/jsm/",
-        "lil-gui": "./node_modules/lil-gui/dist/lil-gui.esm.min.js"
-       
+        "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.184.0/examples/jsm/",
+        "lil-gui": "https://unpkg.com/lil-gui@0.21.0/dist/lil-gui.esm.js",
+        "simplex-noise": "https://esm.sh/simplex-noise@4.0.3/dist/esm/simplex-noise.js"
     }
 }
 </script>
 
-<!-- "simplex-noise": "https://esm.sh/simplex-noise@4.0.3/dist/esm/simplex-noise.js" -->
 <script type="module" src="./index.js"></script>
 </body>
 </html>
