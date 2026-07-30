@@ -12,7 +12,6 @@ const fogControl = gui.addFolder('雾')
 fogControl.add(scene.fog,'near').step(100)
 fogControl.add(scene.fog,'far').step(1000)
 
-
 scene.add(house);
 
 const directionLight = new THREE.DirectionalLight(0xffffff);
@@ -38,13 +37,19 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setClearColor(new THREE.Color('skyblue'))
 renderer.setSize(width, height)
 
-// ===================== 新增窗口自适应代码 =====================
+// 先把画布添加到页面【重要！提前执行】
+document.body.append(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+// 窗口缩放监听
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
-// ==============================================================
 
 let angle = 0;
 let r = 5000;
@@ -52,27 +57,18 @@ function render() {
     angle += 0.01;
 
     if(angle >= Math.PI * 2) {
-
         angle -= Math.PI * 2;
-    
         r = 5000 + Math.random() * 10000;
-    
         camera.position.y = 1000 + Math.random() * 10000;
     }
-    
 
     camera.position.x = r * Math.cos(angle);
     camera.position.z = r * Math.sin(angle);
-
     camera.lookAt(0, 0, 0);
 
+    controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(render);
 }
 
-
 render();
-
-document.body.append(renderer.domElement);
-
-const controls = new OrbitControls(camera, renderer.domElement);
