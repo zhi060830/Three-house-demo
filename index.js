@@ -38,6 +38,14 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setClearColor(new THREE.Color('skyblue'))
 renderer.setSize(width, height)
 
+// ===================== 新增窗口自适应代码 =====================
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+// ==============================================================
+
 let angle = 0;
 let r = 5000;
 function render() {
